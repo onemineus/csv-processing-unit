@@ -22,7 +22,7 @@ function CSVFileInput() {
       <input type="file" accept=".csv" onChange={handleFileUpload} />
       <ul>
         {csvData.map((row, index) => (
-          <li key={index}>{JSON.stringify(row)}</li>
+          // <li key={index}>{JSON.stringify(row)}</li>
         ))}
       </ul>
     </div>
