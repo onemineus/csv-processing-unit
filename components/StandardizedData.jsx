@@ -13,7 +13,7 @@ function CSVFileInput() {
         setCSVData(result.data);
         console.log(result.data);
       },
-      header: true, // Use the first row as headers
+      // header: true, // Use the first row as headers
     });
   };
 
