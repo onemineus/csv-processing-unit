@@ -6,7 +6,7 @@ function CSVFileInput() {
   const [csvData, setCSVData] = useState([]);
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
+    // const file = event.target.files[0];
 
     Papa.parse(file, {
       complete: (result) => {
