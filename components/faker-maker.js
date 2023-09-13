@@ -1,4 +1,4 @@
-const fs = require("fs");
+
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
 // Define the database attributes
