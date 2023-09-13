@@ -1,12 +1,11 @@
-import CSVFileInput from "@/components/StandardizedData";
-import Image from "next/image";
+
+import ProcessingCentre from "@/components/processingCentre";
+
 
 export default function Home() {
   return (
-    <main className="h-screen bg-zinc-950 text-zinc-50">
-      <div>
-        <CSVFileInput />
-      </div>
+    <main className="min-h-screen bg-zinc-950 text-zinc-50">
+      <ProcessingCentre />
     </main>
   );
 }
