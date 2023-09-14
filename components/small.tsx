@@ -7,6 +7,7 @@ import Fuse from "fuse.js"; // Import Fuse.js
 function Small() {
   const [parsedData, setParsedData] = useState<any[]>([]);
   const [tableRows, setTableRows] = useState<string[]>([]);
+  const [mappedDb, setMappedDb] = useState<any[]>([]);
   const [values, setValues] = useState<any[][]>([]);
   const [db, setDb] = useState<any>([
     {
@@ -62,6 +63,40 @@ function Small() {
     threshold: 0.5, // Adjust the threshold as needed
   });
 
+  const processMappedData = (mappedCsv: any[]) => {
+    const processedData = [];
+
+    for (const row of mappedCsv) {
+      // Check if all database attributes have valid values except "Gender"
+      const isValidRow = databaseAttributes.every((attribute) => {
+        if (attribute === "Gender") {
+          // Exclude the "Gender" attribute if the value is not "male" or "female"
+          return (
+            row[attribute]?.toLowerCase() === "male" ||
+            row[attribute]?.toLowerCase() === "female"
+          );
+        } else {
+          const value = row[attribute];
+          // Add your validation logic for other attributes here
+          // For example:
+          // if (attribute === "DateOfBirth") {
+          //   return isValidDate(value);
+          // }
+          // else if (attribute === "BloodPressure") {
+          //   return isValidBloodPressure(value);
+          // }
+          // ...
+          return true; // Default to true for attributes without specific validation
+        }
+      });
+      if (isValidRow) {
+        processedData.push(row);
+      }
+    }
+
+    return processedData;
+  };
+
   // Replace mapCsvColumnsToAttributes with this function
   const mapCsvColumnsToAttributes = (
     csvData: any[],
@@ -70,20 +105,27 @@ function Small() {
     const mappedData = [];
     for (const row of csvData) {
       const mappedRow: any = {};
+      let hasMatch = false; // Flag to track if any attribute was matched
       for (const csvColumnHeader of Object.keys(row)) {
         const matches = fuse.search(csvColumnHeader.toLowerCase());
         if (matches.length > 0 && matches[0].score! <= 0.5) {
           const matchedAttribute: any = matches[0].item;
           mappedRow[matchedAttribute] = row[csvColumnHeader];
+          hasMatch = true; // Set the flag to true if a match is found
         }
       }
-      mappedData.push(mappedRow);
+      if (hasMatch) {
+        // Add the mappedRow to mappedData only if a match was found
+        mappedData.push(mappedRow);
+      }
     }
     return mappedData;
   };
   const updateDb = () => {
     const mappedCSV = mapCsvColumnsToAttributes(parsedData, databaseAttributes);
-    setDb((prevDb: any) => [...prevDb, ...mappedCSV]);
+    const a = processMappedData(mappedCSV);
+    setMappedDb(a);
+    setDb((prevDb: any) => [...prevDb, ...a]);
   };
   const makeTable = (results: any) => {
     const rowsArray: string[] = [];
@@ -117,6 +159,8 @@ function Small() {
   useEffect(() => {
     console.log("db - ");
     console.log(db);
+    console.log("parsed data - ");
+    console.log(parsedData);
   }, [db]);
 
   return (
@@ -125,7 +169,18 @@ function Small() {
       <input type="file" name="file" onChange={changeHandler} accept=".csv" />
       <div>{"db rows - " + db.length}</div>
       <div>{"table rows - " + parsedData.length}</div>
+      {!!parsedData[0] ? (
+        <div>{"table columns - " + Object.keys(parsedData[0]).length}</div>
+      ) : (
+        <div>{"table columns - " + 0}</div>
+      )}
+      <div>{"mapped rows - " + mappedDb.length}</div>
 
+      {!!mappedDb[0] ? (
+        <div>{"mapped columns - " + Object.keys(mappedDb[0]).length}</div>
+      ) : (
+        <div>{"mapped columns - " + 0}</div>
+      )}
       {/* Table */}
       <table>
         <thead>
