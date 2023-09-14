@@ -65,30 +65,28 @@ function Small() {
 
   const processMappedData = (mappedCsv: any[]) => {
     const processedData = [];
-
+    const isValidGender = (value: string) => {
+      const lowercasedValue = value.toLowerCase();
+      return lowercasedValue === "male" || lowercasedValue === "female";
+    };
     for (const row of mappedCsv) {
-      // Check if all database attributes have valid values except "Gender"
+      // Check if all database attributes have valid values
       const isValidRow = databaseAttributes.every((attribute) => {
-        if (attribute === "Gender") {
-          // Exclude the "Gender" attribute if the value is not "male" or "female"
-          return (
-            row[attribute]?.toLowerCase() === "male" ||
-            row[attribute]?.toLowerCase() === "female"
-          );
-        } else {
-          const value = row[attribute];
-          // Add your validation logic for other attributes here
-          // For example:
-          // if (attribute === "DateOfBirth") {
-          //   return isValidDate(value);
-          // }
-          // else if (attribute === "BloodPressure") {
-          //   return isValidBloodPressure(value);
-          // }
-          // ...
-          return true; // Default to true for attributes without specific validation
+        const value = row[attribute];
+
+        switch (attribute) {
+          case "Gender":
+            return isValidGender(value);
+          //   case "DateOfBirth":
+          //     return isValidDateOfBirth(value);
+          //   case "BloodPressure":
+          //     return isValidBloodPressure(value);
+          // Add more cases for other attributes
+          default:
+            return true; // Default to true for attributes without specific validation
         }
       });
+
       if (isValidRow) {
         processedData.push(row);
       }
@@ -123,9 +121,9 @@ function Small() {
   };
   const updateDb = () => {
     const mappedCSV = mapCsvColumnsToAttributes(parsedData, databaseAttributes);
-    const a = processMappedData(mappedCSV);
-    setMappedDb(a);
-    setDb((prevDb: any) => [...prevDb, ...a]);
+    // const a = processMappedData(mappedCSV);
+    setMappedDb(mappedCSV);
+    setDb((prevDb: any) => [...prevDb, ...mappedCSV]);
   };
   const makeTable = (results: any) => {
     const rowsArray: string[] = [];

@@ -47,7 +47,7 @@ for (let i = 0; i < 10; i++) {
     BP: generateRandomBloodPressure(),
     Sugar_Level: (Math.random() * 80 + 70).toFixed(1), // Random value between 70 and 150
     Tests: Math.floor(Math.random() * 10).toString(), // Random value between 0 and 9
-    Gender: Math.random() < 0.5 ? "Male2" : "Female4", // Randomly choose Male or Female
+    Gender: Math.random() < 0.5 ? "Male" : "Female", // Randomly choose Male or Female
     Weight: (Math.random() * 50 + 50).toFixed(1), // Random value between 50 and 100
     Height: Math.floor(Math.random() * 50 + 150).toString(), // Random value between 150 and 199
     Temp: (Math.random() * 2 + 98).toFixed(1), // Random value between 98 and 100
