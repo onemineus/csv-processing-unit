@@ -5,10 +5,10 @@ import Papa from "papaparse";
 import Fuse from "fuse.js"; // Import Fuse.js
 
 function Small() {
-  const [parsedData, setParsedData] = useState<any[]>([]);
+  const [csv, setCsv] = useState<any[]>([]);
   const [tableRows, setTableRows] = useState<string[]>([]);
-  const [mappedDb, setMappedDb] = useState<any[]>([]);
   const [values, setValues] = useState<any[][]>([]);
+  const [moddedCsv, setModdedCsv] = useState<any[]>([]);
   const [db, setDb] = useState<any>([
     {
       DateOfBirth: "initial",
@@ -57,49 +57,12 @@ function Small() {
     "HeartRate",
   ];
 
-  // Create a Fuse instance with your databaseAttributes
   const fuse = new Fuse(databaseAttributes, {
     includeScore: true,
     threshold: 0.5, // Adjust the threshold as needed
   });
 
-  const processMappedData = (mappedCsv: any[]) => {
-    const processedData = [];
-    const isValidGender = (value: string) => {
-      const lowercasedValue = value.toLowerCase();
-      return lowercasedValue === "male" || lowercasedValue === "female";
-    };
-    for (const row of mappedCsv) {
-      // Check if all database attributes have valid values
-      const isValidRow = databaseAttributes.every((attribute) => {
-        const value = row[attribute];
-
-        switch (attribute) {
-          case "Gender":
-            return isValidGender(value);
-          //   case "DateOfBirth":
-          //     return isValidDateOfBirth(value);
-          //   case "BloodPressure":
-          //     return isValidBloodPressure(value);
-          // Add more cases for other attributes
-          default:
-            return true; // Default to true for attributes without specific validation
-        }
-      });
-
-      if (isValidRow) {
-        processedData.push(row);
-      }
-    }
-
-    return processedData;
-  };
-
-  // Replace mapCsvColumnsToAttributes with this function
-  const mapCsvColumnsToAttributes = (
-    csvData: any[],
-    databaseAttributes: string[]
-  ) => {
+  const csvColumnValidator = (csvData: any[], databaseAttributes: string[]) => {
     const mappedData = [];
     for (const row of csvData) {
       const mappedRow: any = {};
@@ -119,13 +82,12 @@ function Small() {
     }
     return mappedData;
   };
-  const updateDb = () => {
-    const mappedCSV = mapCsvColumnsToAttributes(parsedData, databaseAttributes);
-    // const a = processMappedData(mappedCSV);
-    setMappedDb(mappedCSV);
-    setDb((prevDb: any) => [...prevDb, ...mappedCSV]);
+  const updator = () => {
+    const result = csvColumnValidator(csv, databaseAttributes);
+    setModdedCsv(result);
+    setDb((prevDb: any) => [...prevDb, ...moddedCsv]);
   };
-  const makeTable = (results: any) => {
+  const tableMaker = (results: any) => {
     const rowsArray: string[] = [];
     const valuesArray: any[][] = [];
     results.data.forEach((d: any) => {
@@ -136,7 +98,6 @@ function Small() {
     setTableRows(Array.from(new Set(rowsArray)));
     setValues(valuesArray);
   };
-
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || event.target.files.length === 0) {
       return; // No files selected
@@ -145,37 +106,39 @@ function Small() {
       header: true,
       skipEmptyLines: true,
       complete: function (results) {
-        setParsedData(results.data);
-        makeTable(results);
+        setCsv(results.data);
+        tableMaker(results);
       },
     });
   };
   useEffect(() => {
-    updateDb();
-  }, [parsedData]);
+    updator();
+  }, [csv]);
 
   useEffect(() => {
     console.log("db - ");
     console.log(db);
-    console.log("parsed data - ");
-    console.log(parsedData);
-  }, [db]);
+    console.log("parsed data from csv - ");
+    console.log(csv);
+    console.log("modded data from csv - ");
+    console.log(moddedCsv);
+  }, [db, csv, moddedCsv]);
 
   return (
     <div>
       {/* File Uploader */}
       <input type="file" name="file" onChange={changeHandler} accept=".csv" />
       <div>{"db rows - " + db.length}</div>
-      <div>{"table rows - " + parsedData.length}</div>
-      {!!parsedData[0] ? (
-        <div>{"table columns - " + Object.keys(parsedData[0]).length}</div>
+      <div>{"table rows - " + csv.length}</div>
+      {!!csv[0] ? (
+        <div>{"table columns - " + Object.keys(csv[0]).length}</div>
       ) : (
         <div>{"table columns - " + 0}</div>
       )}
-      <div>{"mapped rows - " + mappedDb.length}</div>
+      <div>{"mapped rows - " + moddedCsv.length}</div>
 
-      {!!mappedDb[0] ? (
-        <div>{"mapped columns - " + Object.keys(mappedDb[0]).length}</div>
+      {!!moddedCsv[0] ? (
+        <div>{"mapped columns - " + Object.keys(moddedCsv[0]).length}</div>
       ) : (
         <div>{"mapped columns - " + 0}</div>
       )}
