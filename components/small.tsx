@@ -56,7 +56,6 @@ function Small() {
     "Temperature",
     "HeartRate",
   ];
-
   const fuse = new Fuse(databaseAttributes, {
     includeScore: true,
     threshold: 0.5, // Adjust the threshold as needed
@@ -72,6 +71,7 @@ function Small() {
         if (matches.length > 0 && matches[0].score! <= 0.5) {
           const matchedAttribute: any = matches[0].item;
           mappedRow[matchedAttribute] = row[csvColumnHeader];
+          
           hasMatch = true; // Set the flag to true if a match is found
         }
       }
