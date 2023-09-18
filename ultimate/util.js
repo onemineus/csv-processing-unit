@@ -2,95 +2,192 @@ import Fuse from "fuse.js";
 
 // Define your main attributes
 const medicalDataFields = [
-  "Disease",
-  "TestsPerformed",
-  "TimeSpan",
-  "PreviousDiseases",
-  "BloodGroup",
-  "RhFactor",
-  "HemoglobinCount",
-  "OxygenLevel",
-  "BloodPressure",
-  "Allergies",
-  "SugarLevel",
-  "NumberOfTests",
-  "Gender",
-  "PastMedicalConditions",
-  "Weight",
-  "Height",
-  "Bilirubin",
-  "SodiumPotassiumLevel",
-  "WBCCount",
-  "PlateletCount",
-  "RBCCount",
-  "Cholesterol",
-  "LeukocytesCount",
-  "SurgicalHistory",
-  "FamilyMedicalHistory",
-  "Medicines",
-  "RespiratoryRate",
-  "Temperature",
-  "HeartRate",
+  {
+    name: "Disease",
+    dataType: "string",
+  },
+  {
+    name: "TestsPerformed",
+    dataType: "number",
+  },
+  {
+    name: "TimeSpan",
+    dataType: "string",
+  },
+  {
+    name: "PreviousDiseases",
+    dataType: "string",
+  },
+  {
+    name: "BloodGroup",
+    dataType: "string",
+    allowedValues: (value) =>
+      ["A", "B", "AB", "O"].includes(value.toUpperCase()),
+  },
+  {
+    name: "RhFactor",
+    dataType: "string",
+    allowedValues: (value) =>
+      ["Positive", "Negative"].includes(
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+      ),
+  },
+  {
+    name: "HemoglobinCount",
+    dataType: "number",
+  },
+  {
+    name: "OxygenLevel",
+    dataType: "number",
+  },
+  {
+    name: "BloodPressure",
+    dataType: "string",
+  },
+  {
+    name: "Allergies",
+    dataType: "string",
+  },
+  {
+    name: "SugarLevel",
+    dataType: "number",
+  },
+  {
+    name: "NumberOfTests",
+    dataType: "number",
+  },
+  {
+    name: "Gender",
+    dataType: "string",
+    allowedValues: (value) =>
+      ["Male", "Female", "Other"].includes(
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+      ),
+  },
+  {
+    name: "PastMedicalConditions",
+    dataType: "string",
+  },
+  {
+    name: "Weight",
+    dataType: "number",
+  },
+  {
+    name: "Height",
+    dataType: "number",
+  },
+  {
+    name: "Bilirubin",
+    dataType: "number",
+  },
+  {
+    name: "SodiumPotassiumLevel",
+    dataType: "string",
+  },
+  {
+    name: "WBCCount",
+    dataType: "number",
+  },
+  {
+    name: "PlateletCount",
+    dataType: "number",
+  },
+  {
+    name: "RBCCount",
+    dataType: "number",
+  },
+  {
+    name: "Cholesterol",
+    dataType: "number",
+  },
+  {
+    name: "LeukocytesCount",
+    dataType: "number",
+  },
+  {
+    name: "SurgicalHistory",
+    dataType: "string",
+  },
+  {
+    name: "FamilyMedicalHistory",
+    dataType: "string",
+  },
+  {
+    name: "Medicines",
+    dataType: "string",
+  },
+  {
+    name: "RespiratoryRate",
+    dataType: "number",
+  },
+  {
+    name: "Temperature",
+    dataType: "number",
+  },
+  {
+    name: "HeartRate",
+    dataType: "number",
+  },
 ];
-
-const expectedDataTypes = {
-  Disease: "string",
-  TestsPerformed: "string",
-  TimeSpan: "string",
-  PreviousDiseases: "string",
-  BloodGroup: "string",
-  RhFactor: "string",
-  HemoglobinCount: "number",
-  OxygenLevel: (value) =>
-    !isNaN(parseFloat(value)) &&
-    parseFloat(value) >= 0 &&
-    parseFloat(value) <= 100,
-  BloodPressure: "string",
-  Allergies: "string",
-  SugarLevel: "number",
-  NumberOfTests: "number",
-  Gender: (value) => ["male", "female"].includes(value.toLowerCase()),
-  PastMedicalConditions: "string",
-  Weight: "number",
-  Height: "number",
-  Bilirubin: "number",
-  SodiumPotassiumLevel: "string",
-  WBCCount: "number",
-  PlateletCount: "number",
-  RBCCount: "number",
-  Cholesterol: "number",
-  LeukocytesCount: "number",
-  SurgicalHistory: "string",
-  FamilyMedicalHistory: "string",
-  Medicines: "string",
-  RespiratoryRate: "number",
-  Temperature: "number",
-  HeartRate: "number",
-};
 
 // Function to process and map column names
 const processCsvData = (csvData) => {
   // Create an instance of Fuse with the main attributes
   const fuse = new Fuse(medicalDataFields, {
-    threshold: 0.5,
+    keys: ["name"],
   });
 
   // Process the CSV data
+  const processedData = csvData
+    .map((row) => {
+      const processedRow = {};
 
-  const processedData = csvData.map((row) => {
-    const processedRow = {};
+      // Iterate through CSV column names
+      Object.keys(row).forEach((columnName) => {
+        // Use Fuse to find the closest matching main attribute
+        const result = fuse.search(columnName);
+        if (result.length > 0 && result[0].item) {
+          const mainAttribute = result[0].item.name;
+          const csvValue = row[columnName];
 
-    // Map CSV column names to main attributes using Fuse
-    Object.keys(row).forEach((columnName) => {
-      const result = fuse.search(columnName);
-      if (result.length > 0 && result[0].item) {
-        const mainAttribute = result[0].item;
-        processedRow[mainAttribute] = row[columnName];
-      }
-    });
+          // Validate attribute data type and perform attribute-specific validation
+          const expectedAttribute = medicalDataFields.find(
+            (attribute) => attribute.name === mainAttribute
+          );
 
-    return processedRow;
-  });
+          if (expectedAttribute) {
+            const expectedDataType = expectedAttribute.dataType;
+
+            if (typeof expectedDataType === "string") {
+              // Handle simple data types (string, number)
+              if (
+                (expectedDataType === "string" &&
+                  typeof csvValue === "string") ||
+                (expectedDataType === "number" && !isNaN(parseFloat(csvValue)))
+              ) {
+                // Additional validation for attributes with allowedValues
+                if (
+                  expectedAttribute.allowedValues &&
+                  !expectedAttribute.allowedValues(csvValue)
+                ) {
+                  return; // Discard the row if the value is not allowed
+                }
+
+                processedRow[mainAttribute] = csvValue;
+              }
+            } else if (typeof expectedDataType === "function") {
+              // Handle custom validation functions
+              if (expectedDataType(csvValue)) {
+                processedRow[mainAttribute] = csvValue;
+              }
+            }
+          }
+        }
+      });
+
+      return processedRow;
+    })
+    .filter((row) => Object.keys(row).length > 0); // Remove rows with no valid attributes
 
   return processedData;
 };
