@@ -1,0 +1,11 @@
+Disease,TestsPerformed,TimeSpan,PreviousDiseases,BloodGroup,RhFactor,HemoglobinCount,OxygenLevel,BloodPressure,Allergies,SugarLevel,NumberOfTests,Gender,PastMedicalConditions,Weight,Height,Bilirubin,SodiumPotassiumLevel,WBCCount,PlateletCount,RBCCount,Cholesterol,LeukocytesCount,SurgicalHistory,FamilyMedicalHistory,Medicines,RespiratoryRate,Temperature,HeartRate
+Flu,9,17,Allergies,B,Negative,15,95,124/84,Allergies,81,5,Female,Pneumonia,38,162,0,143/3.61,10266,238541,6,146,10160,Migraine,Pneumonia,Diabetes,17,98,76
+Hypertension,3,26,Diabetes,O,Negative,18,94,94/84,Pneumonia,70,5,Female,Pneumonia,30,190,2,140/4.40,6832,404032,6,172,7390,Flu,Allergies,Arthritis,20,97,60
+Migraine,3,1,Hypertension,O,Negative,12,94,123/83,Migraine,123,3,Male,Hypertension,44,152,1,139/3.60,7545,303707,5,176,7427,Arthritis,Hypertension,Pneumonia,16,97,67
+Common Cold,1,26,Hypertension,B,Negative,12,90,109/65,Arthritis,132,4,Male,Pneumonia,52,173,1,145/4.29,4097,293919,4,157,8039,Hypertension,Common Cold,Diabetes,16,101,89
+Bronchitis,3,21,Migraine,O,Positive,10,94,100/77,Diabetes,79,3,Female,Migraine,74,154,1,143/4.66,10583,418949,4,127,9756,Bronchitis,Asthma,Migraine,18,98,99
+Allergies,4,2,Flu,AB,Negative,13,92,118/66,Migraine,120,3,Female,Common Cold,68,171,1,142/4.82,5732,180895,4,193,9497,Bronchitis,Common Cold,Bronchitis,17,101,77
+Allergies,4,12,Allergies,B,Negative,11,91,105/80,Common Cold,81,1,Female,Hypertension,29,157,0,139/4.16,7738,299381,6,161,6475,Asthma,Bronchitis,Arthritis,19,97,98
+Migraine,8,1,Hypertension,B,Positive,14,98,97/61,Migraine,94,4,Female,Asthma,35,176,2,135/4.86,7826,180658,5,175,6442,Allergies,Diabetes,Allergies,13,99,63
+Hypertension,4,28,Arthritis,A,Negative,16,98,118/75,Pneumonia,70,5,Female,Diabetes,82,174,0,138/4.58,9108,253977,4,190,6580,Arthritis,Asthma,Common Cold,16,99,61
+Flu,1,12,Hypertension,O,Negative,11,93,130/83,Bronchitis,94,2,Female,Diabetes,62,174,0,142/3.84,4024,361451,4,147,10440,Hypertension,Diabetes,Flu,16,96,63

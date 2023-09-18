@@ -1,0 +1,11 @@
+Disea,Testsrformed,meSpan,PreviousDiseases,BloodGroup,RhFactor,HemoglobinCount,OxygenLevel,BloodPressure,Allergies,SugarLevel,NumberOfTests,Gender,PastMedicalConditions,Weight,Height,Bilirubin,SodiumPotassiumLevel,WBCCount,PlateletCount,RBCCount,Cholesterol,LeukocytesCount,SurgicalHistory,FamilyMedicalHistory,Medicines,RespiratoryRate,Temperature,HeartRate
+Flu,21,19,Migraine,O,Positive,10,92,127/75,Diabetes,137,2,Female,Allergies,72,159,0,144/3.90,5307,310221,5,149,4904,Arthritis,Asthma,Arthritis,14,99,90
+Common Cold,21,16,Allergies,B,Negative,15,94,114/68,Arthritis,109,1,Male,Pneumonia,35,182,1,139/4.92,6549,247615,5,156,10909,Asthma,Allergies,Diabetes,19,101,70
+Pneumonia,7,5,Common Cold,AB,Negative,11,92,127/65,Hypertension,108,3,Female,Migraine,5,158,2,139/4.12,9403,358190,4,180,4646,Diabetes,Common Cold,Arthritis,16,98,64
+Bronchitis,22,27,Flu,B,Negative,11,99,103/62,Migraine,123,2,Male,Arthritis,65,172,2,142/4.11,4201,443629,6,165,8317,Bronchitis,Asthma,Diabetes,19,98,75
+Pneumonia,1,10,Diabetes,O,Negative,18,94,128/75,Diabetes,135,1,Male,Asthma,37,158,2,137/4.77,6398,424898,4,212,4757,Migraine,Pneumonia,Diabetes,15,97,93
+Allergies,20,1,Flu,A,Positive,13,99,119/76,Diabetes,85,3,Male,Common Cold,32,157,2,144/4.43,6155,294373,5,176,9582,Pneumonia,Common Cold,Flu,20,101,95
+Common Cold,24,1,Allergies,B,Negative,16,95,99/62,Common Cold,72,5,Male,Asthma,37,188,0,144/4.10,9086,364747,5,127,8532,Arthritis,Common Cold,Allergies,17,101,91
+Common Cold,2,30,Bronchitis,O,Positive,17,98,90/82,Common Cold,110,2,Female,Flu,34,189,0,136/3.62,9232,226943,6,210,4887,Flu,Common Cold,Hypertension,16,97,74
+Flu,17,18,Diabetes,A,Negative,12,94,99/73,Common Cold,88,4,Male,Bronchitis,35,157,2,143/4.58,5409,351048,6,193,9392,Migraine,Bronchitis,Pneumonia,20,97,86
+Bronchitis,24,26,Diabetes,B,Positive,15,95,94/61,Flu,70,5,Male,Bronchitis,37,174,2,135/3.55,8958,312383,4,125,6548,Pneumonia,Asthma,Pneumonia,18,97,73

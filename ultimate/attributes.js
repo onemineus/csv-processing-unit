@@ -1,4 +1,4 @@
-const medicalDataFields = [
+export const medicalDataFields = [
   "Disease",
   "TestsPerformed",
   "TimeSpan",

@@ -2,9 +2,9 @@ import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
 
 // Define the original column names
 const originalColumnNames = [
-  "Disease",
-  "TestsPerformed",
-  "TimeSpan",
+  "Disea",
+  "Testsrformed",
+  "meSpan",
   "PreviousDiseases",
   "BloodGroup",
   "RhFactor",
@@ -127,10 +127,10 @@ function generateMockRowWithErrors(error) {
 // Function to generate a valid value based on the column name
 function generateValidValue(columnName) {
   switch (columnName) {
-    case "Disease":
+    case "Disea":
       return generateRandomDisease();
-    case "TestsPerformed":
-    case "TimeSpan":
+    case "Testsrformed":
+    case "meSpan":
       return getRandomInt(1, 30);
     case "PreviousDiseases":
     case "Allergies":
@@ -185,7 +185,7 @@ function generateValidValue(columnName) {
 }
 
 // Generate and write the CSV file with errors
-const errorPercentage = 90; // Adjust the error percentage as needed
+const errorPercentage = 0; // Adjust the error percentage as needed
 const csvWriter = createCsvWriter({
   path: "mock_data_with_errors.csv",
   header: [
