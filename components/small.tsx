@@ -60,7 +60,6 @@ function Small() {
     includeScore: true,
     threshold: 0.5, // Adjust the threshold as needed
   });
-
   const csvColumnValidator = (csvData: any[], databaseAttributes: string[]) => {
     const mappedData = [];
     for (const row of csvData) {
