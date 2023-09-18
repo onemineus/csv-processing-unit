@@ -1,7 +1,7 @@
 Disea,Testsrformed,meSpan,PreviousDiseases,BloodGroup,RhFactor,laura,Gender,OxygenLevel,BloodPressure,Allergies,SugarLevel,NumberOfTests,PastMedicalConditions,Weight,Height,Bilirubin,SodiumPotassiumLevel,WBCCount,PlateletCount,RBCCount,Cholesterol,LeukocytesCount,SurgicalHistory,FamilyMedicalHistory,Medicines,RespiratoryRate,Temperature,HeartRate
-Flu,4,5,Hypertension,O,Negative,16,Male,97,128/62,Hypertension,114,2,Common Cold,76,184,2,143/4.30,4887,289028,6,205,6382,Allergies,Flu,Migraine,17,98,83
+Flu,4,5,Hypertension,O,Negative,16,Malesd,97,128/62,Hypertension,114,2,Common Cold,76,184,2,143/4.30,4887,289028,6,205,6382,Allergies,Flu,Migraine,17,98,83
 Pneumonia,22,19,Diabetes,O,Negative,10,Female,100,106/88,Diabetes,79,1,Pneumonia,6,157,0,142/4.49,8782,429154,5,187,6342,Common Cold,Allergies,Pneumonia,16,97,73
-Flu,4,19,Migraine,AB,Positive,14,Female,97,136/67,Bronchitis,134,5,Arthritis,87,181,1,143/3.68,10725,309439,6,186,6331,Pneumonia,Allergies,Hypertension,12,101,89
+Flu,meaw,19,Migraine,AB,Positive,14,2,97,136/67,Bronchitis,134,5,Arthritis,87,181,1,143/3.68,10725,309439,6,186,6331,Pneumonia,Allergies,Hypertension,12,101,89
 Migraine,4,27,Hypertension,B,Positive,17,Female,90,136/78,Flu,137,3,Pneumonia,2,187,0,136/3.90,5626,393383,6,179,7073,Migraine,Hypertension,Common Cold,14,101,83
 Arthritis,25,19,Common Cold,A,Positive,11,Male,99,130/90,Migraine,102,5,Bronchitis,53,162,1,144/3.87,8455,300132,4,128,8544,Common Cold,Allergies,Hypertension,18,98,81
 Bronchitis,28,9,Flu,B,Negative,17,Female,94,119/90,Asthma,115,5,Hypertension,80,188,2,136/3.83,8970,362356,5,133,5896,Arthritis,Diabetes,Asthma,20,99,85

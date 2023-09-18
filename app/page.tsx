@@ -35,7 +35,7 @@ export const medicalDataFields = [
 ];
 export default function Home() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-50">
+    <main className="min-h-screen w-full bg-zinc-950 text-zinc-50">
       <h1 className="text-2xl font-bold mb-4">CSV Table Viewer</h1>
       <CsvTable />
     </main>

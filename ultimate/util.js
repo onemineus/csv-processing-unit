@@ -33,6 +33,41 @@ const medicalDataFields = [
   "HeartRate",
 ];
 
+const expectedDataTypes = {
+  Disease: "string",
+  TestsPerformed: "string",
+  TimeSpan: "string",
+  PreviousDiseases: "string",
+  BloodGroup: "string",
+  RhFactor: "string",
+  HemoglobinCount: "number",
+  OxygenLevel: (value) =>
+    !isNaN(parseFloat(value)) &&
+    parseFloat(value) >= 0 &&
+    parseFloat(value) <= 100,
+  BloodPressure: "string",
+  Allergies: "string",
+  SugarLevel: "number",
+  NumberOfTests: "number",
+  Gender: (value) => ["male", "female"].includes(value.toLowerCase()),
+  PastMedicalConditions: "string",
+  Weight: "number",
+  Height: "number",
+  Bilirubin: "number",
+  SodiumPotassiumLevel: "string",
+  WBCCount: "number",
+  PlateletCount: "number",
+  RBCCount: "number",
+  Cholesterol: "number",
+  LeukocytesCount: "number",
+  SurgicalHistory: "string",
+  FamilyMedicalHistory: "string",
+  Medicines: "string",
+  RespiratoryRate: "number",
+  Temperature: "number",
+  HeartRate: "number",
+};
+
 // Function to process and map column names
 const processCsvData = (csvData) => {
   // Create an instance of Fuse with the main attributes
@@ -41,6 +76,7 @@ const processCsvData = (csvData) => {
   });
 
   // Process the CSV data
+
   const processedData = csvData.map((row) => {
     const processedRow = {};
 

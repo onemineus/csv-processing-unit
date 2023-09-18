@@ -8,13 +8,13 @@ const originalColumnNames = [
   "PreviousDiseases",
   "BloodGroup",
   "RhFactor",
-  "HemoglobinCount",
+  "laura",
+  "Gender",
   "OxygenLevel",
   "BloodPressure",
   "Allergies",
   "SugarLevel",
   "NumberOfTests",
-  "Gender",
   "PastMedicalConditions",
   "Weight",
   "Height",
@@ -120,7 +120,6 @@ function generateMockRowWithErrors(error) {
       rowData[originalColumnName] = generateValidValue(originalColumnName);
     }
   }
-
   return rowData;
 }
 
@@ -143,8 +142,10 @@ function generateValidValue(columnName) {
       return generateRandomBloodGroup();
     case "RhFactor":
       return generateRandomRhFactor();
-    case "HemoglobinCount":
+    case "laura":
       return getRandomInt(10, 18);
+    case "Gender":
+      return generateRandomGender();
     case "OxygenLevel":
       return getRandomInt(90, 100);
     case "BloodPressure":
@@ -153,8 +154,6 @@ function generateValidValue(columnName) {
       return getRandomInt(70, 140);
     case "NumberOfTests":
       return getRandomInt(1, 5);
-    case "Gender":
-      return generateRandomGender();
     case "Weight":
       return getRandomInt(0, 100);
     case "Height":
