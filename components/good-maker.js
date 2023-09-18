@@ -23,7 +23,9 @@ const generateRandomDateOfBirth = () => {
   const today = new Date();
   const startDate = new Date(today.getFullYear() - 30, 0, 1).getTime();
   const endDate = today.getTime();
-  const randomDate = new Date(startDate + Math.random() * (endDate - startDate));
+  const randomDate = new Date(
+    startDate + Math.random() * (endDate - startDate)
+  );
   return randomDate.toLocaleDateString();
 };
 
@@ -54,7 +56,10 @@ for (let i = 0; i < 10; i++) {
 // Create a CSV writer
 const csvWriter = createCsvWriter({
   path: "fake_data.csv",
-  header: databaseAttributes.map((attribute) => ({ id: attribute, title: attribute })),
+  header: databaseAttributes.map((attribute) => ({
+    id: attribute,
+    title: attribute,
+  })),
 });
 
 // Write the data to the CSV file
