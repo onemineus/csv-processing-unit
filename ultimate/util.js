@@ -134,6 +134,7 @@ const medicalDataFields = [
 const processCsvData = (csvData) => {
   // Create an instance of Fuse with the main attributes
   const fuse = new Fuse(medicalDataFields, {
+    threshold: 0.5,
     keys: ["name"],
   });
 
@@ -162,7 +163,8 @@ const processCsvData = (csvData) => {
               // Handle simple data types (string, number)
               if (
                 (expectedDataType === "string" &&
-                  typeof csvValue === "string") ||
+                  typeof csvValue === "string" &&
+                  csvValue.trim() !== "") || // Check for non-empty strings
                 (expectedDataType === "number" && !isNaN(parseFloat(csvValue)))
               ) {
                 // Additional validation for attributes with allowedValues
